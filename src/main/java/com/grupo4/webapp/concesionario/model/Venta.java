@@ -23,9 +23,12 @@ public class Venta {
     private Date fecha;
     @NotNull(message = "El precio final no puede ser nulo")
     private Double precioFinal;
-    //@ManyToOne
-    //private Carro carro;
-    //@ManyToMany
-    //@JoinTable(name = "ventas")
+    @ManyToOne
+    private Carro carro;
+    @ManyToOne
+    private Cliente cliente;
+    @ManyToOne
+    private Empleado empleado;
+    
 
 }

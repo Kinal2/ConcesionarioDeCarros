@@ -41,7 +41,7 @@ public class MarcaController {
         }
     }
 
-    @PostMapping("/categoria")
+    @PostMapping("/marca")
     public ResponseEntity<Map<String, String>> agregarMarca(@RequestBody Marca marca){
         Map<String, String> response = new HashMap<>();
         try {
