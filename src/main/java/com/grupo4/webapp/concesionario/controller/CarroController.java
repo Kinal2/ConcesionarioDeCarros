@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.grupo4.webapp.concesionario.model.Carro;
 import com.grupo4.webapp.concesionario.service.CarroService;
+import com.grupo4.webapp.concesionario.util.MethodType;
 
 @Controller
 @RestController
@@ -49,7 +50,7 @@ public class CarroController {
     public ResponseEntity<Map<String, String>> agregarCarro(@RequestBody Carro carro){
         Map<String, String> response = new HashMap<>();
         try {
-            carroService.guardarCarro(carro);
+            carroService.guardarCarro(carro, MethodType.POST);
             response.put("message", "El carro se ha creado con exito!");
             return ResponseEntity.ok(response);
         } catch (Exception e) {
@@ -72,7 +73,7 @@ public class CarroController {
             carro.setEstado(carroNuevo.getEstado());
             carro.setMarca(carroNuevo.getMarca());
             carro.setCategoria(carroNuevo.getCategoria());
-            carroService.guardarCarro(carro);
+            carroService.guardarCarro(carro, MethodType.PUT);
             response.put("message", "El carro se ha editado con exito!");
             return ResponseEntity.ok(response);
         } catch (Exception e) {
