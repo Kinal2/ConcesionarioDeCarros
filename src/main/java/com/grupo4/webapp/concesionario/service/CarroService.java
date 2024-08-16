@@ -43,4 +43,10 @@ public class CarroService implements ICarroService{
         carroRepository.delete(carro);
     }
 
+    @Override
+    public void cambiarEstadoCarro(Carro carro, EstadoCarro estado) {
+        carro.setEstado(estado);
+        carroRepository.save(carro);
+    }
+
 }
