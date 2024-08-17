@@ -20,4 +20,5 @@ public class Accesorio {
     private String nombreAccesorio;
     private String descripcionAccesorio;
     private Double precioAccesorio;
+    private Integer stock;
 }

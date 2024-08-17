@@ -1,5 +1,7 @@
 package com.grupo4.webapp.concesionario.model;
 
+import java.util.List;
+
 import com.grupo4.webapp.concesionario.util.EstadoCarro;
 
 import jakarta.persistence.Entity;
@@ -9,6 +11,9 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -34,4 +39,9 @@ public class Carro {
     private Marca marca;
     @ManyToOne(fetch = FetchType.EAGER)
     private CategoriaCarro categoria; 
+    @ManyToMany
+    @JoinTable(name = "carro_accesorios",
+    joinColumns = @JoinColumn(name = "carro_id", referencedColumnName = "id"),
+    inverseJoinColumns = @JoinColumn(name = "accesorios_id",referencedColumnName = "id"))
+    List<Accesorio> accesorios;
 }

@@ -26,14 +26,14 @@ public class EmpleadoService implements IEmpleadoService{
 
     @Override
     public Boolean guardarEmpleado(Empleado empleado, MethodType methodType) {
-        if(methodType.equals(methodType.POST)){
+        if(methodType.equals(MethodType.POST)){
             if(!verificarDpiDuplicado(empleado)){
                 empleadoRepositoy.save(empleado);
                 return true;
             }else{
                 return false;
             }
-        }else if (methodType.equals(methodType.PUT)) {
+        }else if (methodType.equals(MethodType.PUT)) {
             empleadoRepositoy.save(empleado);
             return true; 
         }
