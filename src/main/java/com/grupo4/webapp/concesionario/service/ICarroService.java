@@ -18,6 +18,6 @@ public interface ICarroService {
 
     public void cambiarEstadoCarro(Carro carro, EstadoCarro estado);
 
-    //public void agregarAccesorioACarro(Carro carro);
+    public void agregarAccesorioACarro(Carro carro);
 
 }

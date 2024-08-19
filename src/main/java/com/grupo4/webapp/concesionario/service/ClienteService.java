@@ -39,5 +39,4 @@ public class ClienteService implements IClienteService {
         clienteRepository.delete(cliente);
     }
 
-    
 }

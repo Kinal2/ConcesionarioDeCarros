@@ -7,3 +7,4 @@ import com.grupo4.webapp.concesionario.model.Cliente;
 public interface ClienteRepository extends JpaRepository<Cliente,Long>{
 
 }
+

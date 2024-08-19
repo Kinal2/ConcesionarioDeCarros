@@ -8,17 +8,17 @@ import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.ToString;
 
-@Entity
+@Entity 
 @Data
 @ToString
-@Table(name = "Empleados")
-public class Empleado {
+@Table(name = "Accesorios")
+public class Accesorio {
+    
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String nombre;
-    private String apellido;
-    private String telefono;
-    private String direccion;
-    private String dpi;
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    private Long id; 
+    private String nombreAccesorio;
+    private String descripcionAccesorio;
+    private Double precioAccesorio;
+    private Integer stock;
 }
