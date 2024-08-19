@@ -1,6 +1,10 @@
 package com.grupo4.webapp.concesionario.model;
 
+import com.grupo4.webapp.concesionario.util.EstadoCarro;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -24,9 +28,10 @@ public class Carro {
     private Double precio;
     private String color;
     private int kilometraje;
-    private String estado;
+    @Enumerated(EnumType.STRING)
+    private EstadoCarro estado;
     @ManyToOne(fetch = FetchType.EAGER)
     private Marca marca;
-    //@ManyToOne(fetch = FetchType.EAGER)
-    //private Categoria categoria; 
+    @ManyToOne(fetch = FetchType.EAGER)
+    private CategoriaCarro categoria; 
 }

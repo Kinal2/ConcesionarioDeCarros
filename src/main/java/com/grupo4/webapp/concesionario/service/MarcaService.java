@@ -3,10 +3,12 @@ package com.grupo4.webapp.concesionario.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.grupo4.webapp.concesionario.model.Marca;
 import com.grupo4.webapp.concesionario.repository.MarcaRepository;
 
+@Service
 public class MarcaService implements IMarcaService{
 
     @Autowired

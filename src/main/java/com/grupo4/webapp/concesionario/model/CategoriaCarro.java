@@ -11,14 +11,13 @@ import lombok.ToString;
 @Entity
 @Data
 @ToString
-@Table(name = "Empleados")
-public class Empleado {
+@Table(name = "CategoriaCarros")
+public class CategoriaCarro {
+    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String nombre;
-    private String apellido;
-    private String telefono;
-    private String direccion;
-    private String dpi;
+    private String nombreCategoriaCarro;
+    private String descripcionCategoriaCarro;
 }

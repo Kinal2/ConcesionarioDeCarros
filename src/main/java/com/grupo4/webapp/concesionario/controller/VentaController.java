@@ -54,7 +54,7 @@ public class VentaController {
                 return ResponseEntity.badRequest().body(response);
             }
         } catch (Exception e) {
-            response.put("message", "Error al agregar la venta");
+            response.put("message", "Error al agregar la venta" + e.getMessage());
             return ResponseEntity.badRequest().body(response);
         }
     }
