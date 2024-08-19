@@ -17,4 +17,5 @@ public interface IServicioService {
     public void eliminarServicio(Servicio servicio);
 
     public void cambiarEstadoCarro(List<Carro> carros, EstadoCarro estado);
+    public void carrosCompletados(Servicio servicio, Servicio newServicio);
 }

@@ -1,8 +1,10 @@
 package com.grupo4.webapp.concesionario.service;
 
+
 import java.util.List;
 
 import com.grupo4.webapp.concesionario.model.Venta;
+import com.grupo4.webapp.concesionario.util.MethodType;
 
 public interface IVentaService {
 
@@ -10,7 +12,7 @@ public interface IVentaService {
 
     public Venta buscarVentaPorId(Long id);
 
-    public Boolean guardarVenta(Venta venta);
+    public Boolean guardarVenta(Venta venta, MethodType methodType );
 
     public void eliminarVenta(Venta venta);
 

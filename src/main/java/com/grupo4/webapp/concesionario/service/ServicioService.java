@@ -56,10 +56,12 @@ public class ServicioService implements IServicioService {
 
     @Override
     public void eliminarServicio(Servicio servicio) {
+        cambiarEstadoCarro(servicio.getCarros(), EstadoCarro.DISPONIBLE);
         servicioRepository.delete(servicio);
+        
     }
 
-
+    @Override
     public void carrosCompletados(Servicio servicio, Servicio newServicio){
         List<Carro> carrosCompleatos = new ArrayList<>();
         for (Carro carro : servicio.getCarros()) {

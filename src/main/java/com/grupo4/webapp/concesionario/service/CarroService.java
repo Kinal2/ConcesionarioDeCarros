@@ -36,10 +36,12 @@ public class CarroService implements ICarroService{
             carro.setEstado(EstadoCarro.DISPONIBLE);
             agregarAccesorioACarro(carro);
             return carroRepository.save(carro);
-        }else{
+        }else if(methodType == MethodType.PUT){
             agregarAccesorioACarro(carro);
             return carroRepository.save(carro);
             
+        }else{
+            return null;
         }
         
     }
@@ -54,6 +56,7 @@ public class CarroService implements ICarroService{
         carro.setEstado(estado);
         carroRepository.save(carro);
     }
+
     @Override
     public void agregarAccesorioACarro(Carro carro) {
         for (Accesorio accesorio: carro.getAccesorios()) {

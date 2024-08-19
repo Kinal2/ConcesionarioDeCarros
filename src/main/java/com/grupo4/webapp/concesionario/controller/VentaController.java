@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.grupo4.webapp.concesionario.model.Venta;
 import com.grupo4.webapp.concesionario.service.VentaService;
+import com.grupo4.webapp.concesionario.util.MethodType;
 
 @Controller
 @RestController
@@ -46,7 +47,7 @@ public class VentaController {
     public ResponseEntity<Map<String, String>> agregarVenta(@RequestBody Venta venta){
         Map<String, String> response = new HashMap<>();
         try {
-            if(ventaService.guardarVenta(venta)){
+            if(ventaService.guardarVenta(venta, MethodType.POST)){
                 response.put("message", "Venta creada con exito !");
                 return ResponseEntity.ok(response);
             }else{
@@ -69,7 +70,7 @@ public class VentaController {
             ventaOld.setCarro(ventaNueva.getCarro());
             ventaOld.setCliente(ventaNueva.getCliente());
             ventaOld.setEmpleado(ventaNueva.getEmpleado());
-            ventaService.guardarVenta(ventaOld);
+            ventaService.guardarVenta(ventaOld, MethodType.PUT);
             response.put("message", "Venta editada con exito!");
             return ResponseEntity.ok(response);
         }catch(Exception e){

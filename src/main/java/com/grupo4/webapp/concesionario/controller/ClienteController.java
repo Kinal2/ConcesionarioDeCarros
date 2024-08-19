@@ -13,7 +13,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.grupo4.webapp.concesionario.model.Cliente;
 import com.grupo4.webapp.concesionario.service.ClienteService;
-
+import com.grupo4.webapp.concesionario.util.MethodType;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -48,7 +48,7 @@ public class ClienteController {
     public ResponseEntity<Map<String, String>> agregarCliente(@RequestBody Cliente cliente) {
         Map<String, String> response = new HashMap<>();
         try {
-            clienteService.guardarCliente(cliente);
+            clienteService.guardarCliente(cliente, MethodType.POST);
             response.put("message", "Cliente agregado con éxito");
             return ResponseEntity.ok(response);
         } catch (ResponseStatusException e) {
@@ -68,7 +68,8 @@ public class ClienteController {
             oldCliente.setNombre(newCliente.getNombre());
             oldCliente.setApellido(newCliente.getApellido());
             oldCliente.setTelefono(newCliente.getTelefono());
-            clienteService.guardarCliente(oldCliente);
+            oldCliente.setDireccion(newCliente.getDireccion());
+            clienteService.guardarCliente(oldCliente, MethodType.PUT);
             response.put("message","El cliente se edito con éxito");
             return ResponseEntity.ok(response);
         } catch (Exception e) {

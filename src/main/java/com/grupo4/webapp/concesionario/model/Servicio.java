@@ -11,6 +11,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.ToString;
@@ -25,7 +26,7 @@ public class Servicio {
     private Long id;
     private Date fechadeEntrada;
     private Date fechadeSalida;
-    @NotNull
+    @NotBlank
     private String descripcion;
     private Boolean completado;
     @NotNull

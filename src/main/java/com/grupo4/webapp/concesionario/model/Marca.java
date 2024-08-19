@@ -5,7 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.ToString;
 
@@ -18,6 +18,6 @@ public class Marca {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotNull(message = "NombreMarca no puede ser nulo")
+    @NotBlank(message = "NombreMarca no puede ser nulo")
     private String nombreMarca;
 }

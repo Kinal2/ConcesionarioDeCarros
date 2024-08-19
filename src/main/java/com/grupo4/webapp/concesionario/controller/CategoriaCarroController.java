@@ -27,13 +27,13 @@ public class CategoriaCarroController {
     @Autowired
     CategoriaCarroService categoriaCarroService;
 
-    @GetMapping("/categoriaCarros")
-    public List<CategoriaCarro> listarCategoriaCarros(){
+    @GetMapping("/categorias")
+    public List<CategoriaCarro> listarCategoriaCarros() {
         return categoriaCarroService.listarCategoriaCarro();
     }
 
-    @GetMapping("/categoriaCarro")
-    public ResponseEntity<CategoriaCarro> buscarCategoriaCarroPorId(@RequestParam Long id){
+    @GetMapping("/categoria")
+    public ResponseEntity<CategoriaCarro> buscarCategoriaCarroPorId(@RequestParam Long id) {
         try {
             return ResponseEntity.ok(categoriaCarroService.buscarCategoriaCarro(id));
         } catch (Exception e) {
@@ -41,61 +41,56 @@ public class CategoriaCarroController {
         }
     }
 
-    @PostMapping("/categoriaCarro")
-    public ResponseEntity<Map<String, Boolean>> agregarCategoriaCarro(@RequestBody CategoriaCarro categoriaCarro){
-        Map<String, Boolean> response = new HashMap<>();
+    @PostMapping("/categoria")
+    public ResponseEntity<Map<String, String>> agregarCategoriaCarro(@RequestBody CategoriaCarro categoriaCarro) {
+        Map<String, String> response = new HashMap<>();
         try {
             if (categoriaCarroService.guardarCategoriaCarros(categoriaCarro)) {
-                response.put("Se agrego la Categoria del Carro con exito", Boolean.TRUE);
+                response.put("message", "se agrego la categoria con exito");
                 return ResponseEntity.ok(response);
             } else {
-                response.put("Err", Boolean.FALSE);
-                response.put("No se pudo agregar la Categoria porq se duplicaria", Boolean.FALSE);
+                response.put("err", "No se pudo agregar la categoria");
                 return ResponseEntity.badRequest().body(response);
             }
-            
         } catch (Exception e) {
-            response.put("Err", Boolean.FALSE);
-            response.put("No se pudo agregar la Categoria del carro", Boolean.FALSE);
+            response.put("err", "No se pudo agregar la categoria");
             return ResponseEntity.badRequest().body(response);
         }
     }
 
-    @PutMapping("/categoriaCarro")
-    public ResponseEntity<Map<String, Boolean>> editarCliente(@RequestParam Long id, @RequestBody CategoriaCarro categoriaCarroNuevo){
-        Map<String, Boolean> response = new HashMap<>();
-        try{
+    @PutMapping("/categoria")
+    public ResponseEntity<Map<String, String>> editarCliente(@RequestParam Long id,
+            @RequestBody CategoriaCarro categoriaCarroNuevo) {
+        Map<String, String> response = new HashMap<>();
+        try {
             CategoriaCarro categoriaCarroViejo = categoriaCarroService.buscarCategoriaCarro(id);
             categoriaCarroViejo.setNombreCategoriaCarro(categoriaCarroNuevo.getNombreCategoriaCarro());
             categoriaCarroViejo.setDescripcionCategoriaCarro(categoriaCarroNuevo.getDescripcionCategoriaCarro());
             if (categoriaCarroService.guardarCategoriaCarros(categoriaCarroViejo)) {
-                response.put("Se edito con exito la categoria del Carro", Boolean.TRUE);
+                response.put("message", "Se edito con exito la categoria del Carro");
                 return ResponseEntity.ok(response);
             } else {
-                response.put("Err", Boolean.FALSE);
-                response.put("no se pudo editar la Categoria porq ya hay una categoria igual existente", Boolean.FALSE);
+                response.put("err", "No se pudo agregar la categoria");
                 return ResponseEntity.badRequest().body(response);
             }
-            
-        }catch(Exception e){
-            response.put("Err", Boolean.FALSE);
-            response.put("no se pudo editar la Categoria", Boolean.FALSE);
+
+        } catch (Exception e) {
+            response.put("err", "No se pudo agregar la categoria");
             return ResponseEntity.badRequest().body(response);
         }
     }
 
-    @DeleteMapping("/categoriaCarro")
-    public ResponseEntity<Map<String, Boolean>> eliminarCategoriaCarroPorId(@RequestParam Long id){
-        Map<String, Boolean> response = new HashMap<>();
+    @DeleteMapping("/categoria")
+    public ResponseEntity<Map<String, String>> eliminarCategoriaCarroPorId(@RequestParam Long id) {
+        Map<String, String> response = new HashMap<>();
         try {
             CategoriaCarro categoriaCarro = categoriaCarroService.buscarCategoriaCarro(id);
             categoriaCarroService.eliminarCategoriaCarros(categoriaCarro);
-            response.put("Se elimino esta Categoria de Carros", Boolean.TRUE);
+            response.put("message", "Se elimino esta Categoria de Carros");
             return ResponseEntity.ok(response);
         } catch (Exception e) {
-            response.put("Err", Boolean.FALSE);
-            response.put("No se pudo eliminar la Categoria de estod Carros", Boolean.FALSE);
-            return ResponseEntity.badRequest().body(response);
+            response.put("err", "No se pudo agregar la categoria");
+                return ResponseEntity.badRequest().body(response);
         }
     }
 }

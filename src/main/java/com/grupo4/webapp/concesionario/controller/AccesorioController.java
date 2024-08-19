@@ -15,7 +15,6 @@ import com.grupo4.webapp.concesionario.service.AccesorioService;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -50,7 +49,7 @@ public class AccesorioController {
         Map<String, String> response = new HashMap<>();
         try {
             accesorioService.guardarAccesorio(accesorio);
-            response.put("message", "Se compro exitosamente");
+            response.put("message", "Se agrego exitosamente");
         return ResponseEntity.ok(response);
         } catch (Exception e) {
            response.put("err", "Hubo un eror en su transaccion"); 
@@ -60,7 +59,7 @@ public class AccesorioController {
 
 
     @PutMapping("/accesorio")
-    public ResponseEntity<Map<String, String>> guardarAccesorio(@PathVariable Long id, @RequestBody Accesorio accesorioNuevo){
+    public ResponseEntity<Map<String, String>> guardarAccesorio(@RequestParam Long id, @RequestBody Accesorio accesorioNuevo){
         Map<String, String> response = new HashMap<>();
         try {
             Accesorio accesorio = accesorioService.buscaAccesorioPorId(id);
@@ -79,7 +78,7 @@ public class AccesorioController {
 
 
     @DeleteMapping("/accesorio")
-    public ResponseEntity<Map<String, String>> eliminarAccesorio(@PathVariable Long id){
+    public ResponseEntity<Map<String, String>> eliminarAccesorio(@RequestParam Long id){
         Map<String,String> response = new HashMap<>();
         try {
             Accesorio accesorio = accesorioService.buscaAccesorioPorId(id);

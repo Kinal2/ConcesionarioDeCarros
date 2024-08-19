@@ -9,6 +9,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.grupo4.webapp.concesionario.model.Cliente;
 import com.grupo4.webapp.concesionario.repository.ClienteRepository;
+import com.grupo4.webapp.concesionario.util.MethodType;
 
 @Service
 public class ClienteService implements IClienteService {
@@ -27,11 +28,17 @@ public class ClienteService implements IClienteService {
     }
 
     @Override
-    public Cliente guardarCliente(Cliente cliente) {
-        if (clienteRepository.existsById(cliente.getDpi())) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El DPI ya pertenece a otro cliente.");
+    public Cliente guardarCliente(Cliente cliente, MethodType methodType) {
+        if(methodType == MethodType.POST){
+            if (clienteRepository.existsById(cliente.getDpi())) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El DPI ya pertenece a otro cliente.");
+            }
+            return clienteRepository.save(cliente);
+        }else{
+            return clienteRepository.save(cliente);
         }
-        return clienteRepository.save(cliente);
+        
+        
     }
 
     @Override
