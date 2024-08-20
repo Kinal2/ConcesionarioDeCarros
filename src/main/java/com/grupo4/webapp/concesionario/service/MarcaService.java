@@ -44,8 +44,8 @@ public class MarcaService implements IMarcaService{
         Boolean flag = false;
 
         for(Marca marca : marcas){
-            if(marcaNueva.getNombreMarca().trim().equalsIgnoreCase(marca.getNombreMarca().trim()) && !marcaNueva.getId().equals(marca.getId())){
-                return true;
+            if(marca.getNombreMarca().equals(marcaNueva.getNombreMarca()) && !marca.getId().equals(marcaNueva.getId())){
+                flag = true;
             }
         }
         return flag;

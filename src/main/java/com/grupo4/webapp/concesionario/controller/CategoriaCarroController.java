@@ -49,7 +49,7 @@ public class CategoriaCarroController {
                 response.put("message", "se agrego la categoria con exito");
                 return ResponseEntity.ok(response);
             } else {
-                response.put("err", "No se pudo agregar la categoria");
+                response.put("err", "Categoria Duplicada");
                 return ResponseEntity.badRequest().body(response);
             }
         } catch (Exception e) {

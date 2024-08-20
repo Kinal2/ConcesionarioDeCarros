@@ -53,7 +53,7 @@ public class MarcaController {
                 return ResponseEntity.badRequest().body(response);
             }
         } catch (Exception e) {
-            response.put("Error", "Error al agregar la marca");
+            response.put("Error", "Error al agregar la marca" + e.getMessage());
             return ResponseEntity.badRequest().body(response);
         }
     }
