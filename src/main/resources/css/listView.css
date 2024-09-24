@@ -1,0 +1,29 @@
+.list-view {
+    background-color: #f4f4f4;
+    border-color: #c0c0c0;
+    border-width: 2px;
+    padding: 5px;
+}
+
+.list-view .list-cell {
+    background-color: white;
+    -fx-text-fill: #333333;
+    padding: 10px;
+    border-color: #e0e0e0;
+    border-width: 0 0 1px 0;
+    font-size: 14px;
+}
+
+.list-view .list-cell:hover {
+    background-color: #e0e0e0;
+}
+
+.list-view .list-cell:selected {
+    background-color: #4285f4;
+    -fx-text-fill: white;
+}
+
+.list-view .list-cell:focused {
+    background-color: #d0d0d0;
+    -fx-text-fill: black;
+}

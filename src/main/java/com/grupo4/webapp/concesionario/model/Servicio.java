@@ -2,8 +2,10 @@ package com.grupo4.webapp.concesionario.model;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -31,9 +33,13 @@ public class Servicio {
     private Boolean completado;
     @NotNull
     private Double costo;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "servicio_carros",
     joinColumns = @JoinColumn(name = "servicio_id", referencedColumnName = "id"),
     inverseJoinColumns = @JoinColumn(name = "carros_id", referencedColumnName = "id"))
     private List<Carro> carros;
+
+    public String formatoCarros() {
+        return carros.stream().map(Carro::getModelo).collect(Collectors.joining(", ")); 
+    }
 }
