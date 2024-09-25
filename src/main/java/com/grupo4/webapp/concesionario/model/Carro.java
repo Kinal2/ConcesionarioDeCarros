@@ -50,7 +50,7 @@ public class Carro {
     @ManyToOne(fetch = FetchType.EAGER)
     @NotNull
     private CategoriaCarro categoria; 
-    @ManyToMany
+    @ManyToMany(fetch =  FetchType.EAGER)
     @JoinTable(name = "carro_accesorios",
     joinColumns = @JoinColumn(name = "carro_id", referencedColumnName = "id"),
     inverseJoinColumns = @JoinColumn(name = "accesorios_id",referencedColumnName = "id"))

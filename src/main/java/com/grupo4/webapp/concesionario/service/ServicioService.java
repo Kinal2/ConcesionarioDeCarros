@@ -6,13 +6,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.stereotype.Service;
 
 import com.grupo4.webapp.concesionario.model.Carro;
 import com.grupo4.webapp.concesionario.model.Servicio;
 import com.grupo4.webapp.concesionario.repository.ServicioRepository;
+import com.grupo4.webapp.concesionario.util.ConcesionarioAlert;
 import com.grupo4.webapp.concesionario.util.EstadoCarro;
 import com.grupo4.webapp.concesionario.util.MethodType;
+
+import javafx.scene.control.ButtonType;
 
 @Service
 public class ServicioService implements IServicioService {
@@ -23,6 +27,9 @@ public class ServicioService implements IServicioService {
     @Autowired
     CarroService carroService;
 
+    @Autowired
+    ConcesionarioAlert concesionarioAlert;
+
     @Override
     public List<Servicio> listaServicios() {
         return servicioRepository.findAll();
@@ -31,6 +38,7 @@ public class ServicioService implements IServicioService {
     @Override
     public Servicio buscarServicioPorId(Long id) {
         return servicioRepository.findById(id).orElse(null);
+
     }
 
     @Override
@@ -40,29 +48,44 @@ public class ServicioService implements IServicioService {
             servicio.setFechadeEntrada(Date.valueOf(LocalDate.now()));
             servicio.setFechadeSalida(Date.valueOf(LocalDate.now().plusDays(5)));
             cambiarEstadoCarro(servicio.getCarros(), EstadoCarro.EN_SERVICIO);
+            concesionarioAlert.mostrarAlertaInfo(401);
             return servicioRepository.save(servicio);
-            
-        }else if(methodType == MethodType.PUT){
-            if(servicio.getCompletado()){
-                servicio.setFechadeSalida(Date.valueOf(LocalDate.now()));
-                cambiarEstadoCarro(servicio.getCarros(), EstadoCarro.DISPONIBLE);
+
+        } else if (methodType == MethodType.PUT) {
+            try {
+                if (concesionarioAlert.mostrarAlertaConfirmacion(106).get() == ButtonType.OK) {
+                    if (servicio.getCompletado()) {
+                        servicio.setFechadeSalida(Date.valueOf(LocalDate.now()));
+                        cambiarEstadoCarro(servicio.getCarros(), EstadoCarro.DISPONIBLE);
+                    }
+                    concesionarioAlert.mostrarAlertaInfo(401);
+                    return servicioRepository.save(servicio);
+                }
+            } catch (Exception e) {
+                concesionarioAlert.mostrarAlertaInfo(404);
             }
-            return servicioRepository.save(servicio);
-        }else{
-            return null;
+
         }
+        return servicio;
 
     }
 
     @Override
     public void eliminarServicio(Servicio servicio) {
-        cambiarEstadoCarro(servicio.getCarros(), EstadoCarro.DISPONIBLE);
-        servicioRepository.delete(servicio);
-        
+        try {
+            if (concesionarioAlert.mostrarAlertaConfirmacion(405).get() == ButtonType.OK) {
+                cambiarEstadoCarro(servicio.getCarros(), EstadoCarro.DISPONIBLE);
+                servicioRepository.delete(servicio);
+                concesionarioAlert.mostrarAlertaInfo(401);
+            }
+        } catch (Exception e) {
+            concesionarioAlert.mostrarAlertaInfo(404);
+        }
+
     }
 
     @Override
-    public void carrosCompletados(Servicio servicio, Servicio newServicio){
+    public void carrosCompletados(Servicio servicio, Servicio newServicio) {
         List<Carro> carrosCompleatos = new ArrayList<>();
         for (Carro carro : servicio.getCarros()) {
             Carro carroCompleto = carroService.buscarCarroPorId(carro.getId());
@@ -81,6 +104,5 @@ public class ServicioService implements IServicioService {
             carroService.cambiarEstadoCarro(carroCompleto, estado);
         }
     }
-
 
 }
