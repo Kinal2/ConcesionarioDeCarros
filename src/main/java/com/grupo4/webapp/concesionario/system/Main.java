@@ -7,6 +7,8 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 
 import com.grupo4.webapp.concesionario.ConcesionarioApplication;
+import com.grupo4.webapp.concesionario.controller.FXController.MarcaControllerFX;
+import com.grupo4.webapp.concesionario.controller.FXController.VentaControllerFX;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -49,6 +51,24 @@ public class Main extends Application {
 
         resultado = (Initializable)loader.getController();
         return resultado;
+    }
+
+    public void MarcasView(){
+        try {
+            MarcaControllerFX marcaView = (MarcaControllerFX)switchScene("MarcasView.fxml",1000,650);
+            marcaView.setStage(this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void VentaView(){
+        try {
+            VentaControllerFX ventaView = (VentaControllerFX)switchScene("VentasView.fxml",1400, 750);
+            ventaView.setStage(this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     
 }
