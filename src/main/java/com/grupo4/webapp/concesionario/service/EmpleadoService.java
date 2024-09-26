@@ -10,9 +10,8 @@ import com.grupo4.webapp.concesionario.repository.EmpleadoRepositoy;
 import com.grupo4.webapp.concesionario.util.MethodType;
 
 @Service
-public class EmpleadoService implements IEmpleadoService {
-
-     @Autowired
+public class EmpleadoService implements IEmpleadoService{
+    @Autowired
     private EmpleadoRepositoy empleadoRepositoy;
 
     @Override

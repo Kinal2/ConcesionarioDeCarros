@@ -19,16 +19,15 @@ public class Venta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotNull(message = "La fecha no puede ser nula")
     private Date fecha;
-    @NotNull(message = "El precio final no puede ser nulo")
     private Double precioFinal;
     @ManyToOne
+    @NotNull
     private Carro carro;
     @ManyToOne
+    @NotNull
     private Cliente cliente;
     @ManyToOne
+    @NotNull
     private Empleado empleado;
-    
-
 }

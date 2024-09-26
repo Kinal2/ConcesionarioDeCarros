@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-//import com.grupo4.webapp.concesionario.model.Accesorio;
+import com.grupo4.webapp.concesionario.model.Accesorio;
 import com.grupo4.webapp.concesionario.model.Carro;
 import com.grupo4.webapp.concesionario.repository.CarroRepository;
 import com.grupo4.webapp.concesionario.util.EstadoCarro;
@@ -17,9 +17,8 @@ public class CarroService implements ICarroService{
 
     @Autowired
     private CarroRepository carroRepository;
-
-    /*@Autowired
-    private AccesorioService accesorioService;*/
+    @Autowired
+    private AccesorioService accesorioService;
 
     @Override
     public List<Carro> listarCarro() {
@@ -35,12 +34,14 @@ public class CarroService implements ICarroService{
     public Carro guardarCarro(Carro carro, MethodType methodType) {
         if(methodType == MethodType.POST){
             carro.setEstado(EstadoCarro.DISPONIBLE);
-            //agregarAccesorioACarro(carro);
+            agregarAccesorioACarro(carro);
             return carroRepository.save(carro);
-        }else{
-            //agregarAccesorioACarro(carro);
+        }else if(methodType == MethodType.PUT){
+            agregarAccesorioACarro(carro);
             return carroRepository.save(carro);
             
+        }else{
+            return null;
         }
         
     }
@@ -56,12 +57,12 @@ public class CarroService implements ICarroService{
         carroRepository.save(carro);
     }
 
-    /*@Override
+    @Override
     public void agregarAccesorioACarro(Carro carro) {
         for (Accesorio accesorio: carro.getAccesorios()) {
             Accesorio accesorioCompleto = accesorioService.buscaAccesorioPorId(accesorio.getId());
             accesorioService.restarStock(accesorioCompleto);
         }
-    }*/
+    }
 
 }

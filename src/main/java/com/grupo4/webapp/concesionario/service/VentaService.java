@@ -1,15 +1,19 @@
 package com.grupo4.webapp.concesionario.service;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.grupo4.webapp.concesionario.model.Accesorio;
 import com.grupo4.webapp.concesionario.model.Carro;
 import com.grupo4.webapp.concesionario.model.Venta;
-import com.grupo4.webapp.concesionario.repository.CarroRepository;
 import com.grupo4.webapp.concesionario.repository.VentaRepository;
+import com.grupo4.webapp.concesionario.util.ConcesionarioAlert;
 import com.grupo4.webapp.concesionario.util.EstadoCarro;
+import com.grupo4.webapp.concesionario.util.MethodType;
 
 @Service
 public class VentaService implements IVentaService {
@@ -17,7 +21,9 @@ public class VentaService implements IVentaService {
     @Autowired
     private VentaRepository ventaRepository;
     @Autowired
-    private CarroRepository carroRepository;
+    private CarroService carroService;
+    @Autowired
+    ConcesionarioAlert concesionarioAlert;
 
     @Override
     public List<Venta> listarVentas() {
@@ -30,25 +36,66 @@ public class VentaService implements IVentaService {
     }
 
     @Override
-    public Boolean guardarVenta(Venta venta) {
-        if(!verificarEstadoCarro(venta)){
-            Carro carro = carroRepository.findById(venta.getCarro().getId()).orElse(null);
-            carro.setEstado(EstadoCarro.VENDIDO);
-            carroRepository.save(carro);
-            ventaRepository.save(venta);
-            return true;
+    public Venta guardarVenta(Venta venta, MethodType methodType) {
+        if(methodType == MethodType.POST){
+            if(!verificarEstadoCarro(venta)){
+                Carro carro = carroService.buscarCarroPorId(venta.getCarro().getId());
+                carroService.cambiarEstadoCarro(carro, EstadoCarro.VENDIDO);
+                venta.setFecha(Date.valueOf(LocalDate.now()));
+                venta.setPrecioFinal(calcularPrecioFinalVenta(venta));
+                concesionarioAlert.mostrarAlertaInfo(401);
+                return ventaRepository.save(venta);
+            }else{
+                concesionarioAlert.mostrarAlertaInfo(501);
+            }
+        }else if( methodType == MethodType.PUT){
+            try {
+                if(concesionarioAlert.mostrarAlertaConfirmacion(106).get() == ButtonType.OK){
+                    if(!verificarEstadoCarro(venta)){
+                        concesionarioAlert.mostrarAlertaInfo(401);
+                        return ventaRepository.save(venta);
+                    }else{
+                        concesionarioAlert.mostrarAlertaInfo(501);
+                    }
+                }
+            } catch (Exception e) {
+                concesionarioAlert.mostrarAlertaInfo(404
+                );
+            }
         }
-        return false;
+        
+        
     }
 
     @Override
     public void eliminarVenta(Venta venta) {
-        ventaRepository.delete(venta);
+        try {
+            if(concesionarioAlert.mostrarAlertaConfirmacion(405).get() == ButtonType.OK){
+                ventaRepository.delete(venta);
+                concesionarioAlert.mostrarAlertaInfo(401);
+            }
+        } catch (Exception e) {
+            concesionarioAlert.mostrarAlertaInfo(404);
+        }
+    }
+
+    private double calcularPrecioFinalVenta(Venta venta) {
+        Carro carro = carroService.buscarCarroPorId(venta.getCarro().getId());
+        double precioTotal = 0;
+        if (carro != null) {
+            precioTotal = carro.getPrecio();
+            if (carro.getAccesorios() != null) {
+                for (Accesorio accesorio : carro.getAccesorios()) {
+                    precioTotal += accesorio.getPrecioAccesorio();
+                }
+            }
+        }
+        return precioTotal;
     }
 
     @Override
     public Boolean verificarEstadoCarro(Venta ventaNueva) {
-        Carro carro = carroRepository.findById(ventaNueva.getCarro().getId()).orElseThrow();
+        Carro carro = carroService.buscarCarroPorId(ventaNueva.getCarro().getId());
         EstadoCarro estado = carro.getEstado();
         Boolean flag = false;
         if(estado == EstadoCarro.EN_SERVICIO || estado == EstadoCarro.VENDIDO ){

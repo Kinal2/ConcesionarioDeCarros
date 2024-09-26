@@ -9,12 +9,19 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.grupo4.webapp.concesionario.model.Cliente;
 import com.grupo4.webapp.concesionario.repository.ClienteRepository;
+import com.grupo4.webapp.concesionario.util.ConcesionarioAlert;
+import com.grupo4.webapp.concesionario.util.MethodType;
+
+import javafx.scene.control.ButtonType;
 
 @Service
 public class ClienteService implements IClienteService {
 
     @Autowired
     ClienteRepository clienteRepository;
+
+    @Autowired
+    ConcesionarioAlert concesionarioAlert;
 
     @Override
     public List<Cliente> listarClientes() {
@@ -27,17 +34,43 @@ public class ClienteService implements IClienteService {
     }
 
     @Override
-    public Cliente guardarCliente(Cliente cliente) {
-        if (clienteRepository.existsById(cliente.getDpi())) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El DPI ya pertenece a otro cliente.");
+    public Cliente guardarCliente(Cliente cliente, MethodType methodType) {
+        if (methodType == MethodType.POST) {
+            if (clienteRepository.existsById(cliente.getDpi())) {
+                concesionarioAlert.mostrarAlertaInfo(406);
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El DPI ya pertenece a otro cliente.");
+
+            }
+            concesionarioAlert.mostrarAlertaInfo(401);
+            return clienteRepository.save(cliente);
+        } else {
+            try {
+                if (concesionarioAlert.mostrarAlertaConfirmacion(106).get() == ButtonType.OK) {
+                    concesionarioAlert.mostrarAlertaInfo(401);
+                    return clienteRepository.save(cliente);
+                }
+
+            } catch (Exception e) {
+                concesionarioAlert.mostrarAlertaInfo(404);
+            }
+
         }
-        return clienteRepository.save(cliente);
+        return cliente;
+
     }
 
     @Override
     public void eliminarCliente(Cliente cliente) {
-        clienteRepository.delete(cliente);
+        try {
+            if (concesionarioAlert.mostrarAlertaConfirmacion(405).get() == ButtonType.OK) {
+                clienteRepository.delete(cliente);
+                concesionarioAlert.mostrarAlertaInfo(401);
+            }
+
+        } catch (Exception e) {
+            concesionarioAlert.mostrarAlertaInfo(404);
+        }
+
     }
 
-    
 }
