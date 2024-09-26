@@ -8,6 +8,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 
 import com.grupo4.webapp.concesionario.ConcesionarioApplication;
 import com.grupo4.webapp.concesionario.controller.FXController.ClienteFXController;
+import com.grupo4.webapp.concesionario.controller.FXController.EmpleadoFXController;
 import com.grupo4.webapp.concesionario.controller.FXController.IndexController;
 import com.grupo4.webapp.concesionario.controller.FXController.ServicioFXController;
 
@@ -79,6 +80,15 @@ public class Main extends Application {
         try {
             ServicioFXController servicioView = (ServicioFXController)switchScene("ServicioView.fxml", 1400, 750);
             servicioView.setStage(this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void EmpleadoView(){
+        try {
+            EmpleadoFXController empleadoService = (EmpleadoFXController)switchScene("EmpleadoView.fxml", 1400, 750);
+            empleadoService.setStage(this);
         } catch (Exception e) {
             e.printStackTrace();
         }
