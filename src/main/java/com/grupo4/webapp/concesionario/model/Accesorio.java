@@ -30,5 +30,5 @@ public class Accesorio {
     private Double precioAccesorio;
     @NotNull
     @PositiveOrZero
-    private Integer stock;
+    private Integer stock;  
 }

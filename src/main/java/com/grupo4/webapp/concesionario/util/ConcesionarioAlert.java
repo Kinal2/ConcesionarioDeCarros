@@ -29,7 +29,7 @@ public class ConcesionarioAlert {
                 alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error DPI duplicado");
                 alert.setHeaderText("Error");
-                alert.setContentText("Ya hay un empleado con este DPI");
+                alert.setContentText("Ya hay un registro con este DPI");
                 break;
             case 0:
                 alert = new Alert(Alert.AlertType.ERROR);
