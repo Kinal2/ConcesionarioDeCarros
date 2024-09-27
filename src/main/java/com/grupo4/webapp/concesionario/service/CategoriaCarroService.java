@@ -44,7 +44,7 @@ public class CategoriaCarroService implements ICategoriaCarroService{
         Boolean flag = false;
 
         for (CategoriaCarro categoriaCarro : categoriaCarros) {
-            if (categoriaCarro.getNombreCategoriaCarro().equalsIgnoreCase(categoriaCarroNuevo.getNombreCategoriaCarro()) && !categoriaCarro.getId().equals(categoriaCarroNuevo.getId())) {
+            if(categoriaCarro.getNombreCategoriaCarro().equals(categoriaCarroNuevo.getNombreCategoriaCarro()) && !categoriaCarro.getId().equals(categoriaCarroNuevo.getId())){
                 flag = true;
             }
         }

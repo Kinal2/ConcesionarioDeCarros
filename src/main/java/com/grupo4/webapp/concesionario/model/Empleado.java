@@ -12,12 +12,19 @@ import lombok.ToString;
 @Entity
 @Data
 @ToString
-@Table(name = "Marcas")
-public class Marca {
-
+@Table(name = "Empleados")
+public class Empleado {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotBlank(message = "NombreMarca no puede ser nulo")
-    private String nombreMarca;
+    @NotBlank
+    private String nombre;
+    @NotBlank
+    private String apellido;
+    @NotBlank
+    private String telefono;
+    @NotBlank
+    private String direccion;
+    @NotBlank
+    private String dpi;
 }

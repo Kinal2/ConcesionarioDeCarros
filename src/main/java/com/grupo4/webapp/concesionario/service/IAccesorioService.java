@@ -2,6 +2,7 @@ package com.grupo4.webapp.concesionario.service;
 
 import java.util.List;
 
+
 import com.grupo4.webapp.concesionario.model.Accesorio;
 
 
@@ -14,4 +15,6 @@ public interface IAccesorioService {
     public Accesorio guardarAccesorio(Accesorio accesorio);
 
     public void eliminarAccesorio(Accesorio accesorio);
+
+    public void restarStock(Accesorio accesorio);
 }
