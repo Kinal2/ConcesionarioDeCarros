@@ -29,7 +29,7 @@ public class IndexController implements Initializable {
     @FXML
     public void handleButtonAction(ActionEvent event) throws Exception {
         if (event.getSource() == btnCategorias) {
-     
+            stage.CategoriaCarroView();
         }else if(event.getSource() == btnClientes){
             stage.ClienteView();
         }else if(event.getSource() == btnEmpleados){

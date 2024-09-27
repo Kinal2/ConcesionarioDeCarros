@@ -6,9 +6,12 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 
 import com.grupo4.webapp.concesionario.ConcesionarioApplication;
+
 import com.grupo4.webapp.concesionario.controller.FXController.CarroFXController;
 import com.grupo4.webapp.concesionario.controller.FXController.MarcaControllerFX;
 import com.grupo4.webapp.concesionario.controller.FXController.VentaControllerFX;
+
+import com.grupo4.webapp.concesionario.controller.FXController.CategoriaCarroFXController;
 import com.grupo4.webapp.concesionario.controller.FXController.ClienteFXController;
 import com.grupo4.webapp.concesionario.controller.FXController.EmpleadoFXController;
 import com.grupo4.webapp.concesionario.controller.FXController.IndexController;
@@ -111,10 +114,20 @@ public class Main extends Application {
         }
     }
 
+
     public void CarroView(){
         try {
             CarroFXController carroService = (CarroFXController)switchScene("CarroView.fxml", 1400, 750);
             carroService.setStage(this);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    public void CategoriaCarroView(){
+        try {
+            CategoriaCarroFXController catergoriaCarroService = (CategoriaCarroFXController)switchScene("CategoriaCarroView.fxml", 1000, 650);
+            catergoriaCarroService.setStage(this);
+
         } catch (Exception e) {
             e.printStackTrace();
         }

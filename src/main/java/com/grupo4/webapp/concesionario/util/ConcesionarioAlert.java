@@ -51,6 +51,27 @@ public class ConcesionarioAlert {
                 alert.setHeaderText("Error");
                 alert.setContentText("El carro no esta disponible");
                 break;
+
+            case 580:
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Err Categoria Duplicada");
+                alert.setHeaderText("Error");
+                alert.setContentText("Ya existe esta categoria");
+                break;
+
+            case 600:
+                alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Se agrego con exito");
+                alert.setHeaderText("hecho");
+                alert.setContentText("Se agrego la Categoria");
+                break;
+
+            case 601:
+                alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Se edito con exito");
+                alert.setHeaderText("hecho");
+                alert.setContentText("Se edito la Categoria");
+                break;
         }
 
         alert.showAndWait();
@@ -69,11 +90,27 @@ public class ConcesionarioAlert {
                 action = alert.showAndWait();
                 break;
 
+            case 406:
+                alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Confirmar eliminación");
+                alert.setHeaderText("Eliminar Categoria");
+                alert.setContentText("¿Estás seguro de que deseas eliminar esta Categoria?");
+                action = alert.showAndWait();
+                break;
+
             case 106:
                 alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Confirmar edición");
                 alert.setHeaderText("Editar Registro");
                 alert.setContentText("¿Estás seguro de que deseas editar este registro?");
+                action = alert.showAndWait();
+                break;
+
+            case 107:
+                alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Confirmar edición");
+                alert.setHeaderText("Editar Categotia");
+                alert.setContentText("¿Estás seguro de que deseas editar esta Categoria?");
                 action = alert.showAndWait();
                 break;
 
