@@ -9,7 +9,9 @@ import org.springframework.context.ConfigurableApplicationContext;
 import com.grupo4.webapp.concesionario.ConcesionarioApplication;
 import com.grupo4.webapp.concesionario.controller.FXController.ClienteFXController;
 import com.grupo4.webapp.concesionario.controller.FXController.EmpleadoFXController;
+import com.grupo4.webapp.concesionario.controller.FXController.FormLoginController;
 import com.grupo4.webapp.concesionario.controller.FXController.IndexController;
+import com.grupo4.webapp.concesionario.controller.FXController.LoginController;
 import com.grupo4.webapp.concesionario.controller.FXController.ServicioFXController;
 
 import javafx.application.Application;
@@ -35,8 +37,8 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
        this.stage = primaryStage;
-       stage.setTitle("Biblioteca Kinal Spring");
-       indexView();
+       stage.setTitle("Concesionario de Autos");
+       LoginView();
        stage.show();
     }
  
@@ -62,6 +64,25 @@ public class Main extends Application {
         try {
             IndexController indexView = (IndexController)switchScene("index.fxml", 1000, 650);
             indexView.setStage(this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void LoginView(){
+        try {
+            LoginController loginView = (LoginController)switchScene("LoginView.fxml", 500, 600);
+            loginView.setStage(this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public void FormLoginView(){
+        try {
+            FormLoginController userView = (FormLoginController)switchScene("FormUser.fxml", 500, 600);
+            userView.setStage(this);
         } catch (Exception e) {
             e.printStackTrace();
         }

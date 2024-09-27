@@ -1,3 +1,8 @@
+package com.grupo4.webapp.concesionario.util;
+
+import org.mindrot.jbcrypt.BCrypt;
+import org.springframework.stereotype.Component;
+
 @Component
 public class PasswordUtils {
     public String encryptedPassword(String pass){

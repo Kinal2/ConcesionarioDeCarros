@@ -19,6 +19,11 @@ public class ConcesionarioAlert {
                 alert.setHeaderText("Operación realizada con éxito");
                 alert.setContentText("Se ha realizado la operacion exitosamente.");
                 break;
+            case 402:
+                alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("");
+                alert.setHeaderText("Operación realizada con éxito");
+                alert.setContentText("Se ha realizado la operacion exitosamente.");
             case 404:
                 alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error Al eliminar o editar");
@@ -26,10 +31,24 @@ public class ConcesionarioAlert {
                 alert.setContentText("No se pueden modificar o eliminar Registros con refencias en otras tablas");
                 break;
             case 406:
-                alert = new Alert(Alert.AlertType.ERROR);
+                alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Error DPI duplicado");
                 alert.setHeaderText("Error");
                 alert.setContentText("Ya hay un registro con este DPI");
+                break;
+
+            case 407:
+                alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Error Usuario incorrecto");
+                alert.setHeaderText("Error");
+                alert.setContentText("No existe un usuario con este nombre");
+                break;
+
+            case 408:
+                alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Error contraseña incorrecta");
+                alert.setHeaderText("Error");
+                alert.setContentText("Verifique su contraseña");
                 break;
             case 0:
                 alert = new Alert(Alert.AlertType.ERROR);
@@ -73,6 +92,13 @@ public class ConcesionarioAlert {
         }
 
         return action;
+    }
+
+    public void alertaSaludo(String usuario){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Bienvendo");
+            alert.setHeaderText("Bienvenido " + usuario);
+            alert.showAndWait();
     }
 
 }
