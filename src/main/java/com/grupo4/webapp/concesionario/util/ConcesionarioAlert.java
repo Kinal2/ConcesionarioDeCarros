@@ -37,6 +37,20 @@ public class ConcesionarioAlert {
                 alert.setHeaderText("Error");
                 alert.setContentText("Ha ocurrido un error inesperado.");
                 break;
+
+            case 500:
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error Marca duplicada");
+                alert.setHeaderText("Error");
+                alert.setContentText("Ya existe una marca con este nombre");
+                break;
+
+            case 501:
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error Carro No Disponible");
+                alert.setHeaderText("Error");
+                alert.setContentText("El carro no esta disponible");
+                break;
         }
 
         alert.showAndWait();

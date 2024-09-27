@@ -11,8 +11,11 @@ import com.grupo4.webapp.concesionario.model.Accesorio;
 import com.grupo4.webapp.concesionario.model.Carro;
 import com.grupo4.webapp.concesionario.model.Venta;
 import com.grupo4.webapp.concesionario.repository.VentaRepository;
+import com.grupo4.webapp.concesionario.util.ConcesionarioAlert;
 import com.grupo4.webapp.concesionario.util.EstadoCarro;
 import com.grupo4.webapp.concesionario.util.MethodType;
+
+import javafx.scene.control.ButtonType;
 
 @Service
 public class VentaService implements IVentaService {
@@ -21,6 +24,8 @@ public class VentaService implements IVentaService {
     private VentaRepository ventaRepository;
     @Autowired
     private CarroService carroService;
+    @Autowired
+    ConcesionarioAlert concesionarioAlert;
 
     @Override
     public List<Venta> listarVentas() {
@@ -33,31 +38,47 @@ public class VentaService implements IVentaService {
     }
 
     @Override
-    public Boolean guardarVenta(Venta venta, MethodType methodType) {
+    public Venta guardarVenta(Venta venta, MethodType methodType) {
         if(methodType == MethodType.POST){
             if(!verificarEstadoCarro(venta)){
                 Carro carro = carroService.buscarCarroPorId(venta.getCarro().getId());
                 carroService.cambiarEstadoCarro(carro, EstadoCarro.VENDIDO);
                 venta.setFecha(Date.valueOf(LocalDate.now()));
                 venta.setPrecioFinal(calcularPrecioFinalVenta(venta));
-                ventaRepository.save(venta);
-                return true;
+                concesionarioAlert.mostrarAlertaInfo(401);
+                return ventaRepository.save(venta);
             }else{
-                return false;
+                concesionarioAlert.mostrarAlertaInfo(501);
             }
         }else if( methodType == MethodType.PUT){
-            ventaRepository.save(venta);
-            return true;
-        }else{
-            return false;
+            try {
+                if(concesionarioAlert.mostrarAlertaConfirmacion(106).get() == ButtonType.OK){
+                    if(!verificarEstadoCarro(venta)){
+                        concesionarioAlert.mostrarAlertaInfo(401);
+                        return ventaRepository.save(venta);
+                    }else{
+                        concesionarioAlert.mostrarAlertaInfo(501);
+                    }
+                }
+            } catch (Exception e) {
+                concesionarioAlert.mostrarAlertaInfo(404
+                );
+            }
         }
-        
+        return venta;
         
     }
 
     @Override
     public void eliminarVenta(Venta venta) {
-        ventaRepository.delete(venta);
+        try {
+            if(concesionarioAlert.mostrarAlertaConfirmacion(405).get() == ButtonType.OK){
+                ventaRepository.delete(venta);
+                concesionarioAlert.mostrarAlertaInfo(401);
+            }
+        } catch (Exception e) {
+            concesionarioAlert.mostrarAlertaInfo(404);
+        }
     }
 
     private double calcularPrecioFinalVenta(Venta venta) {
