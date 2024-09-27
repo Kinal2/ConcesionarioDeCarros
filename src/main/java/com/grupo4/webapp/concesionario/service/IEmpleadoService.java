@@ -10,7 +10,7 @@ public interface IEmpleadoService {
 
     public Empleado buscarEmpleadoPorId(Long id);
 
-    public Boolean guardarEmpleado(Empleado empleado, MethodType methodType);
+    public Empleado guardarEmpleado(Empleado empleado, MethodType methodType);
 
     public void eliminarEmpleado(Empleado empleado);
 

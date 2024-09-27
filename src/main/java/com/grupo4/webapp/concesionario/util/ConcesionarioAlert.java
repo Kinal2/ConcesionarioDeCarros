@@ -29,7 +29,7 @@ public class ConcesionarioAlert {
                 alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error DPI duplicado");
                 alert.setHeaderText("Error");
-                alert.setContentText("Ya hay un empleado con este DPI");
+                alert.setContentText("Ya hay un registro con este DPI");
                 break;
             case 0:
                 alert = new Alert(Alert.AlertType.ERROR);
@@ -50,7 +50,7 @@ public class ConcesionarioAlert {
             case 405:
                 alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Confirmar eliminación");
-                alert.setHeaderText("Eliminar");
+                alert.setHeaderText("Eliminar Registro");
                 alert.setContentText("¿Estás seguro de que deseas eliminar el registro?");
                 action = alert.showAndWait();
                 break;
@@ -58,7 +58,7 @@ public class ConcesionarioAlert {
             case 106:
                 alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Confirmar edición");
-                alert.setHeaderText("Editar préstamo");
+                alert.setHeaderText("Editar Registro");
                 alert.setContentText("¿Estás seguro de que deseas editar este registro?");
                 action = alert.showAndWait();
                 break;
