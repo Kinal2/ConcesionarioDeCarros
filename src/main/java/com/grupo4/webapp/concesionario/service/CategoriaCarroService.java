@@ -1,4 +1,5 @@
 package com.grupo4.webapp.concesionario.service;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.grupo4.webapp.concesionario.model.CategoriaCarro;
 import com.grupo4.webapp.concesionario.repository.CategoriaCarroRepository;
+import com.grupo4.webapp.concesionario.util.MethodType;
 
 @Service
 public class CategoriaCarroService implements ICategoriaCarroService{
@@ -24,13 +26,19 @@ public class CategoriaCarroService implements ICategoriaCarroService{
     }
 
     @Override
-    public Boolean guardarCategoriaCarros(CategoriaCarro categoriaCarro) {
-        if (!verificarCategoriaCarroDuplicado(categoriaCarro)) {
+    public Boolean guardarCategoriaCarros(CategoriaCarro categoriaCarro, MethodType methodType) {
+        if(methodType.equals(MethodType.POST)){
+            if (!verificarCategoriaCarroDuplicado(categoriaCarro)) {
+                categoriaCarroRepository.save(categoriaCarro);
+                return true;
+            } else {
+                return false;
+            }
+        }else if(methodType.equals(MethodType.PUT)) {
             categoriaCarroRepository.save(categoriaCarro);
             return true;
-        } else {
-            return false;
         }
+        return true;
     }
 
     @Override
