@@ -45,13 +45,8 @@ public class EmpleadoController {
     public ResponseEntity<Map<String, String>> guardarEmpleado(@RequestBody Empleado empleado) {
         Map<String, String> response = new HashMap<>();
         try {
-            if (empleadoService.guardarEmpleado(empleado, MethodType.POST)) {
-                response.put("message", "Empleado agregado con éxito");
-            } else {
-                response.put("err", "DPI duplicado");
-                return ResponseEntity.badRequest().body(response);
-            }
-
+            empleadoService.guardarEmpleado(empleado, MethodType.POST);
+            response.put("message", "Empleado agregado con éxito");
             return ResponseEntity.ok(response);
         } catch (Exception e) {
             response.put("error", "error al agregar el empleado");
@@ -70,13 +65,10 @@ public class EmpleadoController {
             empleado.setTelefono(empleadoNuevo.getTelefono());
             empleado.setDireccion(empleadoNuevo.getDireccion());
             empleado.setDpi(empleadoNuevo.getDpi());
-            if (empleadoService.guardarEmpleado(empleado, MethodType.PUT)) {
-                response.put("message", "empleado editado con exito");
-                return ResponseEntity.ok(response);
-            } else {
-                response.put("error", "no se pudo editar el empleado");
-                return ResponseEntity.badRequest().body(response);
-            }
+            empleadoService.guardarEmpleado(empleado, MethodType.PUT);
+            response.put("message", "empleado editado con exito");
+            return ResponseEntity.ok(response);
+
 
         } catch (Exception e) {
             response.put("error", "no se pudo editar el empleado");

@@ -39,11 +39,11 @@ public class IndexController implements Initializable {
         }else if(event.getSource() == btnServicios){
             stage.ServicioView();
         }else if(event.getSource() == btnMarcas){
-        
+            stage.MarcaVIEW();
         }else if(event.getSource() == btnAccesorios){
         
         }else if(event.getSource() == btnVentas){
-        
+            stage.VentaView();
         }
     }
 }

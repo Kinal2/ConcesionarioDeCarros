@@ -12,7 +12,7 @@ public interface IVentaService {
 
     public Venta buscarVentaPorId(Long id);
 
-    public Boolean guardarVenta(Venta venta, MethodType methodType );
+    public Venta guardarVenta(Venta venta, MethodType methodType );
 
     public void eliminarVenta(Venta venta);
 

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.grupo4.webapp.concesionario.model.Marca;
 import com.grupo4.webapp.concesionario.service.MarcaService;
+import com.grupo4.webapp.concesionario.util.MethodType;
 
 @Controller
 @RestController
@@ -45,13 +46,9 @@ public class MarcaController {
     public ResponseEntity<Map<String, String>> agregarMarca(@RequestBody Marca marca){
         Map<String, String> response = new HashMap<>();
         try {
-            if(marcaService.guardarMarca(marca)){
-                response.put("message", "Se agrego con exito la marca");
-                return ResponseEntity.ok(response);
-            }else{
-                response.put("message","Marca ya existente");
-                return ResponseEntity.badRequest().body(response);
-            }
+            marcaService.guardarMarca(marca, MethodType.POST);
+            response.put("message", "Marca agregada con exito");
+            return ResponseEntity.ok(response);
         } catch (Exception e) {
             response.put("Error", "Error al agregar la marca" + e.getMessage());
             return ResponseEntity.badRequest().body(response);
@@ -64,7 +61,7 @@ public class MarcaController {
         try {
             Marca marcaOld = marcaService.buscarMarcaPorId(id);
             marcaOld.setNombreMarca(nuevaMarca.getNombreMarca());
-            marcaService.guardarMarca(marcaOld);
+            marcaService.guardarMarca(marcaOld,MethodType.PUT);
             response.put("message", "Marca editada con exito");
             return ResponseEntity.ok(response);
         } catch (Exception e) {
