@@ -3,6 +3,7 @@ package com.grupo4.webapp.concesionario.service;
 import java.util.List;
 
 import com.grupo4.webapp.concesionario.model.Marca;
+import com.grupo4.webapp.concesionario.util.MethodType;
 
 public interface IMarcaService {
 
@@ -10,7 +11,7 @@ public interface IMarcaService {
 
     public Marca buscarMarcaPorId(Long id);
 
-    public Boolean guardarMarca(Marca marca);
+    public Marca guardarMarca(Marca marca, MethodType methodType);
 
     public void eliminarMarca(Marca marca);
 

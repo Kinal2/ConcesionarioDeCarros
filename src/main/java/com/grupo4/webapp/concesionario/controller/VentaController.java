@@ -47,13 +47,9 @@ public class VentaController {
     public ResponseEntity<Map<String, String>> agregarVenta(@RequestBody Venta venta){
         Map<String, String> response = new HashMap<>();
         try {
-            if(ventaService.guardarVenta(venta, MethodType.POST)){
-                response.put("message", "Venta creada con exito !");
-                return ResponseEntity.ok(response);
-            }else{
-                response.put("message", "El carro no esta disponible");
-                return ResponseEntity.badRequest().body(response);
-            }
+            ventaService.guardarVenta(venta,MethodType.POST);
+            response.put("message","Venta realizada con exito");
+            return ResponseEntity.ok(response);
         } catch (Exception e) {
             response.put("message", "Error al agregar la venta" + e.getMessage());
             return ResponseEntity.badRequest().body(response);

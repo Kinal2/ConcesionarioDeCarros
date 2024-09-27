@@ -20,4 +20,12 @@ public class Marca {
     private Long id;
     @NotBlank(message = "NombreMarca no puede ser nulo")
     private String nombreMarca;
+
+
+    @Override
+    public String toString() {
+        return nombreMarca;
+    }
+
+    
 }

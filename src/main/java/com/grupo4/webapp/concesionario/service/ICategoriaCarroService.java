@@ -1,6 +1,7 @@
 package com.grupo4.webapp.concesionario.service;
 import java.util.List;
 import com.grupo4.webapp.concesionario.model.CategoriaCarro;
+import com.grupo4.webapp.concesionario.util.MethodType;
 
 public interface ICategoriaCarroService {
 
@@ -8,7 +9,7 @@ public interface ICategoriaCarroService {
 
     public CategoriaCarro buscarCategoriaCarro(Long id);
 
-    public Boolean guardarCategoriaCarros(CategoriaCarro categoriaCarro);
+    public CategoriaCarro guardarCategoriaCarros(CategoriaCarro categoriaCarro, MethodType methodType);
 
     public void eliminarCategoriaCarros(CategoriaCarro categoriaCarro);
 

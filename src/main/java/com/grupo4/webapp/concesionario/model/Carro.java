@@ -1,6 +1,8 @@
 package com.grupo4.webapp.concesionario.model;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
 import com.grupo4.webapp.concesionario.util.EstadoCarro;
 
 import jakarta.persistence.Entity;
@@ -50,10 +52,14 @@ public class Carro {
     @ManyToOne(fetch = FetchType.EAGER)
     @NotNull
     private CategoriaCarro categoria; 
-    @ManyToMany
+    @ManyToMany(fetch =  FetchType.EAGER)
     @JoinTable(name = "carro_accesorios",
     joinColumns = @JoinColumn(name = "carro_id", referencedColumnName = "id"),
     inverseJoinColumns = @JoinColumn(name = "accesorios_id",referencedColumnName = "id"))
     List<Accesorio> accesorios;
+
+    public String formatoAccesorios() {
+        return accesorios.stream().map(Accesorio::getNombreAccesorio).collect(Collectors.joining(", ")); 
+    }
 }
 
