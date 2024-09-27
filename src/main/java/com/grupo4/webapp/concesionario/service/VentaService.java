@@ -15,6 +15,8 @@ import com.grupo4.webapp.concesionario.util.ConcesionarioAlert;
 import com.grupo4.webapp.concesionario.util.EstadoCarro;
 import com.grupo4.webapp.concesionario.util.MethodType;
 
+import javafx.scene.control.ButtonType;
+
 @Service
 public class VentaService implements IVentaService {
 
@@ -63,7 +65,7 @@ public class VentaService implements IVentaService {
                 );
             }
         }
-        
+        return venta;
         
     }
 

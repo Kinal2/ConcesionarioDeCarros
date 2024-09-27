@@ -18,6 +18,7 @@ import com.grupo4.webapp.concesionario.service.ClienteService;
 import com.grupo4.webapp.concesionario.service.EmpleadoService;
 import com.grupo4.webapp.concesionario.service.VentaService;
 import com.grupo4.webapp.concesionario.system.Main;
+import com.grupo4.webapp.concesionario.util.MethodType;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -72,7 +73,7 @@ public class VentaControllerFX implements Initializable {
                 editarVenta();
             }
         }else if(event.getSource() == btnRegresar){
-
+            stage.indexView();
         }else if(event.getSource() == btnEliminar){
             eliminarVenta();
         }else if(event.getSource() == btnLimpiar){
@@ -146,7 +147,7 @@ public class VentaControllerFX implements Initializable {
         venta.setCarro(carro);
         venta.setCliente(cliente);
         venta.setEmpleado(empleado);
-        ventaService.guardarVenta(venta);
+        ventaService.guardarVenta(venta, MethodType.POST);
         cargarDatos();
     }
 
@@ -160,7 +161,7 @@ public class VentaControllerFX implements Initializable {
         venta.setCarro(carro);
         venta.setCliente(cliente);
         venta.setEmpleado(empleado);
-        ventaService.guardarVenta(venta);
+        ventaService.guardarVenta(venta, MethodType.PUT);
         cargarDatos();
     }
 

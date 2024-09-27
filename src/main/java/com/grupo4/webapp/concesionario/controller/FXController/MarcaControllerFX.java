@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import com.grupo4.webapp.concesionario.model.Marca;
 import com.grupo4.webapp.concesionario.service.MarcaService;
 import com.grupo4.webapp.concesionario.system.Main;
+import com.grupo4.webapp.concesionario.util.MethodType;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -53,7 +54,7 @@ public class MarcaControllerFX implements Initializable {
                 editarMarca();
             }
         }else if(event.getSource() == btnRegresar){
-
+            stage.indexView();
         }else if(event.getSource() == btnEliminar){
             eliminarMarca();
         }else if(event.getSource() == btnLimpiar){
@@ -94,14 +95,14 @@ public class MarcaControllerFX implements Initializable {
     public void agregarMarca(){
         Marca marca = new Marca();
         marca.setNombreMarca(tfNombreMarca.getText());
-        marcaService.guardarMarca(marca);
+        marcaService.guardarMarca(marca,MethodType.POST);
         cargarDatos();
     }
 
     public void editarMarca(){
         Marca marca = marcaService.buscarMarcaPorId(Long.parseLong(tfId.getText()));
         marca.setNombreMarca(tfNombreMarca.getText());
-        marcaService.guardarMarca(marca);
+        marcaService.guardarMarca(marca,MethodType.PUT);
         cargarDatos();
     }
 

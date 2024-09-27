@@ -9,16 +9,15 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.grupo4.webapp.concesionario.controller.FXController.VentaControllerFX">
    <children>
       <ImageView fitHeight="750.0" fitWidth="1400.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../assests/Ventas.png" />
+            <Image url="@../images/Ventas.png" />
          </image>
       </ImageView>
-      <TextField fx:id="tfId" layoutX="77.0" layoutY="158.0" />
-      <TextField fx:id="tfFecha" layoutX="77.0" layoutY="294.0" />
+      <TextField fx:id="tfId" editable="false" layoutX="77.0" layoutY="158.0" />
+      <TextField fx:id="tfFecha" editable="false" layoutX="77.0" layoutY="294.0" />
       <TextField fx:id="tfPrecio" layoutX="77.0" layoutY="465.0" />
       <ComboBox fx:id="cmbCarros" layoutX="362.0" layoutY="158.0" prefWidth="150.0" />
       <ComboBox fx:id="cmbClientes" layoutX="625.0" layoutY="158.0" prefWidth="150.0" />

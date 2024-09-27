@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 import com.grupo4.webapp.concesionario.model.Marca;
 import com.grupo4.webapp.concesionario.repository.MarcaRepository;
 import com.grupo4.webapp.concesionario.util.ConcesionarioAlert;
-import com.grupo4.webapp.concesionario.util.Me;
+import com.grupo4.webapp.concesionario.util.MethodType;
+
+import javafx.scene.control.ButtonType;
 
 @Service
 public class MarcaService implements IMarcaService{
@@ -30,11 +32,11 @@ public class MarcaService implements IMarcaService{
     }
 
     @Override
-    public Boolean guardarMarca(Marca marca, MethodType methodType) {
+    public Marca guardarMarca(Marca marca, MethodType methodType) {
         if(methodType == MethodType.POST){
             if(!verificarMarcaDuplicada(marca)){
                 concesionarioAlert.mostrarAlertaInfo(401);
-                 return marcaRepository.save(marca);;
+                 return marcaRepository.save(marca);
             }else{
                 concesionarioAlert.mostrarAlertaInfo(500);
             }
@@ -53,7 +55,7 @@ public class MarcaService implements IMarcaService{
             concesionarioAlert.mostrarAlertaInfo(404);
         }
     }
-       return false;
+    return marca;
     }
 
     @Override
