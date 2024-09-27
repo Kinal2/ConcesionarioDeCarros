@@ -63,8 +63,6 @@ public class CarroFXController implements Initializable{
     @Autowired
     AccesorioService accesorioService;
 
-    @Autowired
-    CarroRepository carroRepository;
 
     @Setter
     private Main stage;
@@ -72,7 +70,6 @@ public class CarroFXController implements Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         cargarDatos();
-        cmbEstado.setItems(listarEstado(null));
         cmbMarca.setItems(listarMarcas());
         cmbCategoria.setItems(listarCategorias());
         cmbAccesorios.setItems(listarAccesorios());
@@ -116,13 +113,7 @@ public class CarroFXController implements Initializable{
     public ObservableList<Carro> listarCarros(){
         return FXCollections.observableList(carroService.listarCarro());
     }
-
-    public ObservableList<Carro> listarEstado(EstadoCarro estado) {
-        List<Carro> carrosPorEstado = carroRepository.findByEstado(estado);
-        return FXCollections.observableList(carrosPorEstado);
-    }
-    
-    
+      
     public ObservableList<Marca> listarMarcas(){
         return FXCollections.observableList(marcaService.listarMarcas());
     }

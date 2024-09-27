@@ -23,4 +23,10 @@ public class CategoriaCarro {
     private String nombreCategoriaCarro;
     @NotBlank
     private String descripcionCategoriaCarro;
+
+    @Override
+    public String toString() {
+        return nombreCategoriaCarro;
+    }
+    
 }

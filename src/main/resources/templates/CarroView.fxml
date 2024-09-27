@@ -9,7 +9,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.grupo4.webapp.concesionario.controller.FXController.CarroFXController">
    <children>
       <ImageView disable="true" fitHeight="25.0" fitWidth="38.0" layoutX="1271.0" layoutY="227.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -21,7 +21,7 @@
             <Image url="@../images/MenuCarros.png" />
          </image>
       </ImageView>
-      <TextField fx:id="tfId" layoutX="14.0" layoutY="176.0" prefHeight="30.0" prefWidth="150.0" style="-fx-border-radius: 20; -fx-background-radius: 20;" />
+      <TextField fx:id="tfId" editable="false" layoutX="14.0" layoutY="176.0" prefHeight="30.0" prefWidth="150.0" style="-fx-border-radius: 20; -fx-background-radius: 20;" />
       <TextField fx:id="tfModelo" layoutX="181.0" layoutY="176.0" prefHeight="30.0" prefWidth="150.0" style="-fx-border-radius: 20; -fx-background-radius: 20;" />
       <TextField fx:id="tfAño" layoutX="410.0" layoutY="176.0" prefHeight="30.0" prefWidth="150.0" style="-fx-border-radius: 20; -fx-background-radius: 20;" />
       <TextField fx:id="tfPrecio" layoutX="625.0" layoutY="176.0" prefHeight="30.0" prefWidth="150.0" style="-fx-border-radius: 20; -fx-background-radius: 20;" />

@@ -31,4 +31,12 @@ public class Accesorio {
     @NotNull
     @PositiveOrZero
     private Integer stock;
+
+
+    @Override
+    public String toString() {
+        return nombreAccesorio;
+    }
+
+    
 }
