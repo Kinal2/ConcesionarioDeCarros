@@ -132,8 +132,7 @@ public class ServicioFXController implements Initializable {
         colCarros.setCellValueFactory(
                 new Callback<TableColumn.CellDataFeatures<Servicio, String>, ObservableValue<String>>() {
                     @Override
-                    public ObservableValue<String> call(
-                            TableColumn.CellDataFeatures<Servicio, String> cellData) {
+                    public ObservableValue<String> call(TableColumn.CellDataFeatures<Servicio, String> cellData) {
                         Servicio servicio = cellData.getValue();
                         return new SimpleStringProperty(servicio.formatoCarros());
                     }

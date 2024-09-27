@@ -48,9 +48,9 @@ public class FormLoginController implements Initializable{
         if(event.getSource() == btnCrear){
             agregarUsuario();
             concesionarioAlert.mostrarAlertaInfo(401);
-            stage.LoginView();
+            stage.loginView();
         }else if(event.getSource() == btnRegresar){
-            stage.LoginView();
+            stage.loginView();
         }
     }
 

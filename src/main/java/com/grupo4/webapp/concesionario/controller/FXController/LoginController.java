@@ -70,7 +70,7 @@ public class LoginController implements Initializable {
                    concesionarioAlert.mostrarAlertaInfo(407);
                 }   
             } else if (event.getSource() == btnCrear) {
-                stage.FormLoginView();
+                stage.formLoginView();
             }
 
         

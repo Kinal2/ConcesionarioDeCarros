@@ -29,21 +29,21 @@ public class IndexController implements Initializable {
     @FXML
     public void handleButtonAction(ActionEvent event) throws Exception {
         if (event.getSource() == btnCategorias) {
-     
+            stage.categoriaCarroView();
         }else if(event.getSource() == btnClientes){
-            stage.ClienteView();
+            stage.clienteView();
         }else if(event.getSource() == btnEmpleados){
-            stage.EmpleadoView();
+            stage.empleadoView();
         }else if(event.getSource() == btnCarros){
-
+            stage.carroView();
         }else if(event.getSource() == btnServicios){
-            stage.ServicioView();
+            stage.servicioView();
         }else if(event.getSource() == btnMarcas){
-        
+            stage.marcaView();
         }else if(event.getSource() == btnAccesorios){
-        
+            stage.accesoriosView();
         }else if(event.getSource() == btnVentas){
-        
+            stage.ventaView();
         }
     }
 }
